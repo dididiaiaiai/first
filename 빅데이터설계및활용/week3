@@ -20,6 +20,10 @@ print('가장 많이 나타나는 요소는:',max_value)
 
 sales = (100, 121, 120, 130, 140, 120, 122, 123, 190, 125)
 drop = 0
+
+
+주어진 튜플: (1, 2, 5, 4, 3, 2, 1, 4, 7, 8, 9, 9, 3, 7, 3)
+가장 많이 나타나는 요소는: 3
 ############################################################
 for i in range(len(sales)-1):
   if sales[i] > sales[i+1]:
@@ -27,6 +31,10 @@ for i in range(len(sales)-1):
 
 print('일일 매출 기록:', sales)
 print('지난 {}일 동안 전일대비 매출이 감소한 날은 {}일입니다. '.format(len(sales), drop))
+
+
+일일 매출 기록: (100, 121, 120, 130, 140, 120, 122, 123, 190, 125)
+지난 10일 동안 전일대비 매출이 감소한 날은 3일입니다. 
 ############################################################
 menu = {'Americano' : 3000, 'Ice Americano' : 3500, 'Cappuccino' : 4000, 'Cafe Latte' : 4500, 'Espresso' : 3600}
 
@@ -38,6 +46,15 @@ if choice in menu.keys():
   print('{}는 {:,}원 입니다. 결제를 부탁합니다.' .format(choice, menu[choice]))
 else:
   print('미안합니다. {}는 메뉴에 없습니다.' .format(choice))
+
+
+Americano        가격 : 3,000원
+Ice Americano    가격 : 3,500원
+Cappuccino       가격 : 4,000원
+Cafe Latte       가격 : 4,500원
+Espresso         가격 : 3,600원
+위의 메뉴중 하나를 선택하세요:Americano
+Americano는 3,000원 입니다. 결제를 부탁합니다.
 ############################################################
 s_list = ['abc', 'bcd', 'bcdefg', 'abba', 'cddc', 'opq']
 min_len = len(s_list[0])
@@ -50,6 +67,9 @@ for s in s_list:
     min_s = s
 
 print('가장 길이가 짧은 문자열:', min_s)
+
+
+가장 길이가 짧은 문자열: abc
 ############################################################
 s_list = ['abc', 'bcd', 'bcdefg', 'abba', 'cddc', 'opq']
 s_list.sort(key=len)
@@ -62,3 +82,7 @@ for s in s_list:
     group_list.append(s)
 
 print("가장 길이가 짧은 문자열 : '{}', '{}', '{}'" .format(group_list[0], group_list[1], group_list[2]))
+
+
+['abc', 'bcd', 'opq', 'abba', 'cddc', 'bcdefg']
+가장 길이가 짧은 문자열 : 'abc', 'bcd', 'opq'
