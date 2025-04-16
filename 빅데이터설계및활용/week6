@@ -1,0 +1,13 @@
+import pandas as pd
+import numpy as np
+
+path = 'https://github.com/dongupak/DataML/raw/main/csv/'
+file = path+'vehicle_prod.csv'
+df = pd.read_csv(file, index_col=0)
+
+sums = df.select_dtypes(np.number).sum().rename('Total')
+averages = df.select_dtypes(np.number).mean().rename('Average')
+total_df = pd.concat([df, sums.to_frame().T])
+average_df = pd.concat([total_df, averages.to_frame().T])
+
+print(average_df)
