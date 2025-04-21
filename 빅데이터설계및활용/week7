@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+path = 'https://github.com/dongupak/DataML/raw/main/csv/'
+weather_file = path + 'weather.csv'
+
+weather = pd.read_csv(weather_file, encoding='CP949')
+weather['month'] = pd.DatetimeIndex(weather['일시']).month
+
+monthly = [None for x in range(12)]
+monthly_wind = [0 for x in range(12)]
+for i in range(12):
+  monthly[i] = weather[weather['month'] == i+1]
+  monthly_wind[i] = monthly[i].mean(numeric_only=True)['평균풍속']
+
+months = np.arange(1, 13)
+plt.bar(months, monthly_wind, color='green')
+plt.xlabel('Month')
+plt.ylabel('Wind')
