@@ -1,0 +1,47 @@
+import pandas as pd
+import json
+
+json_file_path = "/content/data/light_spotify_dataset.json"
+
+with open(json_file_path, 'r') as f:
+  file_content = f.read()
+
+json_data = [json.loads(line) for line in file_content.splitlines() if line.strip()]
+
+df = pd.DataFrame(json_data)
+
+print(df.info())
+print(df.head())
+
+////////////////////////////////////////////////////////////////////////////////////
+
+import pandas as pd
+import xml.etree.ElementTree as ET
+
+xml_file_path = "/content/data/sample_book.xml"
+
+tree = ET.parse(xml_file_path)
+root = tree.getroot()
+
+elements = root.findall('*')
+
+df = pd.DataFrame(columns=['title', 'author', 'price', 'genre'])
+
+for element in elements:
+  row = {}
+  if element.find('title') is not None:
+    row['title'] = element.find('title').text
+  if element.find('author') is not None:
+    row['author'] = element.find('author').text
+  if element.find('price') is not None:
+    row['price'] = element.find('price').text
+  if element.find('genre') is not None:
+    row['genre'] = element.find('genre').text
+  
+ 
+  if row:  
+    new_df = pd.DataFrame([row], columns=df.columns)
+    df = pd.concat([df, new_df], ignore_index=True)
+
+  print(df.info())
+  print(df.head())
