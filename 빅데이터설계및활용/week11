@@ -1,0 +1,9 @@
+import pandas as pd
+file = '/content/owid-covid-data.csv'
+df = pd.read_csv(file)
+usa_df = df[df.location == 'United States']
+usa_date_index_df = usa_df.set_index('date')
+usa_date_index_df.head()
+
+usa_total_cases = usa_date_index_df['total_cases']
+usa_total_cases
