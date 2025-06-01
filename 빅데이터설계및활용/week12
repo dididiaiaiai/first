@@ -1,0 +1,61 @@
+import pandas as pd
+
+raw_ca_df = pd.read_csv('/content/data_ca.csv')
+ca_total_cases = raw_ca_df[['tot_cases', 'date_updated']]
+ca_dateindex_df = ca_total_cases.set_index('date_updated')
+
+raw_tx_df = pd.read_csv('/content/data_tx.csv')
+tx_total_cases = raw_tx_df[['tot_cases', 'date_updated']]
+tx_dateindex_df = tx_total_cases.set_index('date_updated')
+
+raw_va_df = pd.read_csv('/content/data_va.csv')
+va_total_cases = raw_va_df[['tot_cases', 'date_updated']]
+va_dateindex_df = va_total_cases.set_index('date_updated')
+
+raw_il_df = pd.read_csv('/content/data_il.csv')
+il_total_cases = raw_il_df[['tot_cases', 'date_updated']]
+il_dateindex_df = il_total_cases.set_index('date_updated')
+
+raw_wa_df = pd.read_csv('/content/data_wa.csv')
+wa_total_cases = raw_wa_df[['tot_cases', 'date_updated']]
+wa_dateindex_df = wa_total_cases.set_index('date_updated')
+
+ca_population = 39_430_000
+tx_population = 31_290_000
+va_population = 8_810_000
+il_population = 12_710_000
+wa_population = 670_000
+usa_population = 340_100_000
+
+ca_rate = round((ca_population / usa_population),3)
+tx_rate = round((tx_population / usa_population),3)
+va_rate = round((va_population / usa_population),3)
+il_rate = round((il_population / usa_population),3)
+wa_rate = round((wa_population / usa_population),3)
+
+print(ca_rate)
+print(tx_rate)
+print(va_rate)
+print(il_rate)
+print(wa_rate)
+
+ca_dateindex_df.index = pd.to_datetime(ca_dateindex_df.index)
+tx_dateindex_df.index = pd.to_datetime(tx_dateindex_df.index)
+va_dateindex_df.index = pd.to_datetime(va_dateindex_df.index)
+il_dateindex_df.index = pd.to_datetime(il_dateindex_df.index) 
+wa_dateindex_df.index = pd.to_datetime(wa_dateindex_df.index)
+
+final_df = pd.concat([ca_dateindex_df * ca_rate, tx_dateindex_df * tx_rate, va_dateindex_df * va_rate, il_dateindex_df * il_rate, wa_dateindex_df * wa_rate], axis=1)
+final_df.columns = ['CA', 'TX', 'VA', 'IL', 'WA']
+final_df.head()
+
+final_df.plot.line(rot=45)
+
+/////////////////////////////////////
+0.116
+0.092
+0.026
+0.037
+0.002
+<Axes: xlabel='date_updated'>
+
